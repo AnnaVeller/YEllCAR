@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path style="paint-order: fill markers; stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round; stroke-dashoffset: -21px; stroke: rgb(124, 23, 23); fill: rgba(255, 248, 42, 0.85);" d="M 170.874 208.8 C 160.255 208.8 240.774 2 250 2 C 252.391 2 326.256 209 320 209 C 320 200.404 488 205.411 488 209 C 489.912 210.275 359.85 326.882 356.437 324.607 C 366.378 323.613 428.078 487.192 420 488 C 409.366 504.874 238.336 369.714 250 359.1 C 254.658 369.11 87.565 501.356 80 488 C 76.175 488 131.745 321.898 141.754 321.898 C 138.077 327.413 -1.546 214.32 2 209 C 2 206.185 170.9 199.903 170.9 209 L 170 208.8 L 170.874 208.8 Z" bx:origin="0.529 0.525"/>
+</svg>
