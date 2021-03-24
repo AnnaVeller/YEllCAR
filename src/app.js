@@ -6,7 +6,7 @@ const ROAD_SIZE = {w: 400, h: 600};
 const CAR_SIZE = {w: 60, h: 100};
 const STAR_SIZE = {w: 60, h: 60};
 const SENSITIVITY = 5;
-const FPS = 60;
+const FPS = 120;
 const SCORE_WIN = 10;
 const START = "СТАРТ";
 const END = "НАЧАТЬ ЗАНОВО";
@@ -14,6 +14,20 @@ const RECORD_BEGIN = 1000;
 
 let game;
 let record = RECORD_BEGIN;
+
+// Звуковые файлы
+const clashAudio = new Audio();
+clashAudio.src = "audio/clash.wav";
+
+const roadAudio = new Audio();
+roadAudio.loop = true;
+roadAudio.src = "audio/road.wav";
+
+const beginAudio = new Audio();
+beginAudio.src = "audio/car_engine3.wav";
+
+const winAudio = new Audio();
+winAudio.src = "audio/win.wav";
 
 
 class Road {
@@ -78,7 +92,6 @@ class Car {
         this.y += SENSITIVITY;
     }
 
-
     getX() {
         return this.x;
     }
@@ -114,24 +127,26 @@ class Game {
 
     constructor() {
         this.score = 0;
+        beginAudio.play();
+        roadAudio.play();
         this.road = new Road("img/road.jpg");
         this.car = new Car("img/car.svg");
         this.starArray = [];
         this.beginTime = new Date().getTime();
         this.time = 0;
-        this.timerId = setInterval(this.updateFrame.bind(this), 1000 / FPS);
+        this.timerUpdateId = setInterval(this.updateFrame.bind(this), 1000 / FPS);
         document.addEventListener('keydown', e => {
-            switch (e.keyCode) {
-                case 37:
+            switch (e.key) {
+                case 'ArrowLeft':
                     this.car.goLeft();
                     break;
-                case 38:
+                case 'ArrowUp':
                     this.car.goUp();
                     break;
-                case 39:
+                case 'ArrowRight':
                     this.car.goRight();
                     break;
-                case 40:
+                case 'ArrowDown':
                     this.car.goDown();
                     break;
             }
@@ -173,6 +188,7 @@ class Game {
                     carTop < starBottom && carBottom > starTop
                 )
             ) {
+                clashAudio.play();
                 this.score++;
                 delete this.starArray[index];
             }
@@ -207,11 +223,13 @@ class Game {
     }
 
     doWeEnd() {
-        if (this.score === SCORE_WIN) {
+        if (this.score >= SCORE_WIN) {
             if (+this.time < record) {
                 record = +this.time;
             }
-            clearInterval(this.timerId);
+            roadAudio.pause();
+            winAudio.play();
+            clearInterval(this.timerUpdateId);
             // сделать кнопку конца сразу после того, как удалим интеравал
             setTimeout(() => new Button([END, `Счет: ${this.score}`, `Время: ${this.time}`], END));
         }
