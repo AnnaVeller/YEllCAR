@@ -10,8 +10,10 @@ const FPS = 60;
 const SCORE_WIN = 10;
 const START = "СТАРТ";
 const END = "НАЧАТЬ ЗАНОВО";
+const RECORD_BEGIN = 1000;
 
 let game;
+let record = RECORD_BEGIN;
 
 
 class Road {
@@ -194,8 +196,21 @@ class Game {
         context.fillText("Время: " + this.time, 0, ROAD_SIZE.h);
     }
 
+    drawRecord() {
+        if (record !== RECORD_BEGIN) { // чтобы при первой игре ничего не отображалось
+            context.textAlign = "left";
+            context.textBaseline = "bottom";
+            context.fillStyle = "yellow";
+            context.font = "24px Verdana";
+            context.fillText("Рекорд: " + record, ROAD_SIZE.w - 130, ROAD_SIZE.h);
+        }
+    }
+
     doWeEnd() {
         if (this.score === SCORE_WIN) {
+            if (+this.time < record) {
+                record = +this.time;
+            }
             clearInterval(this.timerId);
             // сделать кнопку конца сразу после того, как удалим интеравал
             setTimeout(() => new Button([END, `Счет: ${this.score}`, `Время: ${this.time}`], END));
@@ -217,6 +232,7 @@ class Game {
         this.drawScore();
         this.time = this.getTimer();
         this.drawTime();
+        this.drawRecord();
     }
 
     getPlayerTime() {
@@ -229,7 +245,6 @@ class Button {
     constructor(textArr, action = "DEFAULT") {
         this.height = 100 + (textArr.length - 1) * 10;
         this.width = 250;
-        console.log(this.height);
         this.x = canvas.width / 2 - this.width / 2;
         this.y = canvas.height / 2 - this.height / 2;
         context.beginPath();
@@ -289,7 +304,6 @@ class App {
     static init() {
         const road = new Image();
         road.src = "img/road.jpg";
-        console.log(road);
 
         road.onload = function () {
             context.drawImage(road, 0, 0, ROAD_SIZE.w, ROAD_SIZE.h);
