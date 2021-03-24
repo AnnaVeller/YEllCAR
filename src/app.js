@@ -232,25 +232,30 @@ class Game {
             clearInterval(this.timerUpdateId);
             // сделать кнопку конца сразу после того, как удалим интеравал
             setTimeout(() => new Button([END, `Счет: ${this.score}`, `Время: ${this.time}`], END));
+            return true;
         }
+        return false;
     }
 
     updateFrame() {
-        this.doWeEnd();
-        this.road.update();
-        this.addStars();
-
-        this.starArray.forEach(star => {
-            const y = this.road.getY();
-            star.update(y);
-        });
-
-        this.car.update();
-        this.deleteIfWeStrike();
-        this.drawScore();
         this.time = this.getTimer();
-        this.drawTime();
-        this.drawRecord();
+        if (this.doWeEnd()) {
+            // end of game
+        } else {
+            this.road.update();
+            this.addStars();
+
+            this.starArray.forEach(star => {
+                const y = this.road.getY();
+                star.update(y);
+            });
+
+            this.car.update();
+            this.deleteIfWeStrike();
+            this.drawScore();
+            this.drawTime();
+            this.drawRecord();
+        }
     }
 
     getPlayerTime() {
