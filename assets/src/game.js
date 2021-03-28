@@ -127,7 +127,7 @@ class Game {
 
     youLose() {
         roadAudio.pause();
-        winAudio.play();
+        loseAudio.play();
         clearInterval(this.timerUpdateId);
         // сделать кнопку конца сразу после того, как удалим интеравал
         setTimeout(() => new Button([LOSE_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT));

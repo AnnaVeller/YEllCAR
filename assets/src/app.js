@@ -14,7 +14,7 @@ const END_TEXT = "ТЫ ВЫИГРАЛ";
 const LOSE_TEXT = "ТЫ ПРОИГРАЛ"
 const RECORD_BEGIN = 1000;
 const FREQUENCY_STARS = 0.01;
-const FREQUENCY_BOMBS = 0.01;
+const FREQUENCY_BOMBS = 0.003;
 
 
 let game;
@@ -33,6 +33,9 @@ beginAudio.src = "assets/audio/car_engine3.wav";
 
 const winAudio = new Audio();
 winAudio.src = "assets/audio/win.wav";
+
+const loseAudio = new Audio();
+loseAudio.src = "assets/audio/lose.mp3";
 
 
 class App {
