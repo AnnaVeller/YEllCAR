@@ -218,7 +218,7 @@ class Game {
             context.textBaseline = "bottom";
             context.fillStyle = "yellow";
             context.font = "24px Verdana";
-            context.fillText("Рекорд: " + record, ROAD_SIZE.w - 130, ROAD_SIZE.h);
+            context.fillText("Рекорд: " + record, 0, ROAD_SIZE.h - 25);
         }
     }
 
