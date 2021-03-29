@@ -6,6 +6,9 @@ const ROAD_SIZE = {w: 400, h: 600};
 const CAR_SIZE = {w: 60, h: 100};
 const STAR_SIZE = {w: 60, h: 60};
 const BOMB_SIZE = {w: 60, h: 85};
+const BOOM_SIZE = {w: 80, h: 80};
+const BOOM2_SIZE = {w: 100, h: 100};
+const BOOM3_SIZE = {w: 120, h: 120};
 const ENGINE_SPEED = 5;
 const FPS = 120;
 const SCORE_WIN = 10;
@@ -20,13 +23,15 @@ const FREQUENCY_BOMBS = 0.003;
 let game;
 let record = RECORD_BEGIN;
 
+const boom1 = new Image();
+boom1.src = "assets/img/boom.svg";
+
+const boom2 = new Image();
+boom2.src = "assets/img/boom-2.svg";
+
 // Звуковые файлы
 const clashAudio = new Audio();
 clashAudio.src = "assets/audio/clash.wav";
-
-const roadAudio = new Audio();
-roadAudio.loop = true;
-roadAudio.src = "assets/audio/road.wav";
 
 const beginAudio = new Audio();
 beginAudio.src = "assets/audio/car_engine3.wav";
@@ -36,6 +41,10 @@ winAudio.src = "assets/audio/win.wav";
 
 const loseAudio = new Audio();
 loseAudio.src = "assets/audio/lose.mp3";
+
+const roadAudio = new Audio();
+roadAudio.loop = true;
+roadAudio.src = "assets/audio/road.wav";
 
 
 class App {

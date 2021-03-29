@@ -54,6 +54,8 @@ class Game {
         const carTop = this.car.getY();
         const carBottom = this.car.getY() + CAR_SIZE.h;
 
+        let doWeMeet = false;  // была ли хотя бы одна встреча
+
         objArray.forEach((obj, index) => {
             const objLeft = obj.getX();
             const objRight = obj.getX() + obj_SIZE.w;
@@ -69,10 +71,11 @@ class Game {
             ) {
                 action();
                 delete objArray[index];
+                doWeMeet = true;
             }
         });
         objArray = objArray.filter(obj => !!obj);
-        return objArray;
+        return [objArray, doWeMeet];
     }
 
     actionIfWeMetStar = () => {
@@ -129,35 +132,50 @@ class Game {
         roadAudio.pause();
         loseAudio.play();
         clearInterval(this.timerUpdateId);
+        const x = this.car.getX() + CAR_SIZE.w / 2;
+        const y = this.car.getY() + CAR_SIZE.h / 2;
+        setTimeout(this.drawBoom.bind(this, BOOM_SIZE, x, y), 0);
+        setTimeout(this.drawBoom.bind(this, BOOM2_SIZE, x, y), 200);
+        setTimeout(this.drawBoom.bind(this, BOOM3_SIZE, x, y), 300);
         // сделать кнопку конца сразу после того, как удалим интеравал
-        setTimeout(() => new Button([LOSE_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT));
+        setTimeout(() =>
+                new Button([LOSE_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT)
+            , 400);
     }
+
+    drawBoom(size, x, y) {
+        context.drawImage(boom1, x - size.w / 2, y - size.h / 2, size.w, size.h);
+    }
+
 
     updateFrame() {
         this.time = this.getTimer();
-        if (this.doWeEnd()) {
+        let doWeMet = false;
+        [this.starArray, doWeMet] = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
+        doWeMet = false;
+        [this.bombArray, doWeMet] = this.doActionIfStrikeTrue(this.bombArray, BOMB_SIZE, this.actionIfWeMetBomb);
+        this.road.update();
+        this.car.update();
+
+        this.starArray.forEach(star => {
+            const y = this.road.getY();
+            star.update();
+        });
+
+        this.bombArray.forEach(bomb => {
+            const y = this.road.getY();
+            bomb.update();
+        });
+
+        if (this.doWeEnd() || doWeMet) {
             // end of game
         } else {
-            this.road.update();
-            this.addStars();
-            this.addBombs();
-
-            this.starArray.forEach(star => {
-                const y = this.road.getY();
-                star.update();
-            });
-
-            this.bombArray.forEach(bomb => {
-                const y = this.road.getY();
-                bomb.update();
-            });
-
-            this.car.update();
-            this.starArray = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
-            this.bombArray = this.doActionIfStrikeTrue(this.bombArray, BOMB_SIZE, this.actionIfWeMetBomb);
             this.drawScore();
             this.drawTime();
             this.drawRecord();
+
+            this.addStars();
+            this.addBombs();
         }
     }
 
