@@ -13,19 +13,19 @@ class Car {
     }
 
     goRight() {
-        this.x += ENGINE_SPEED;
+        if (this.x + CAR_SIZE.w < ROAD_SIZE.w) this.x += ENGINE_SPEED;
     }
 
     goLeft() {
-        this.x -= ENGINE_SPEED;
+        if (this.x > 0) this.x -= ENGINE_SPEED;
     }
 
     goUp() {
-        this.y -= ENGINE_SPEED;
+        if (this.y > 0) this.y -= ENGINE_SPEED;
     }
 
     goDown() {
-        this.y += ENGINE_SPEED;
+        if (this.y + CAR_SIZE.h < ROAD_SIZE.h) this.y += ENGINE_SPEED;
     }
 
     getX() {
