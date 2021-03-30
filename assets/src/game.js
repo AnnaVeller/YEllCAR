@@ -10,25 +10,27 @@ class Game {
         this.beginTime = new Date().getTime();
         this.time = 0;
         this.timerUpdateId = setInterval(this.updateFrame.bind(this), 1000 / FPS);
+        this.isWin = false;
+        this.isLose = false;
         document.addEventListener('keydown', e => {
-            switch (e.key) {
-                case 'ArrowLeft':
+            switch (e.keyCode) {
+                case 37:
                     this.car.goLeft();
                     break;
-                case 'ArrowUp':
+                case 38:
                     this.car.goUp();
                     break;
-                case 'ArrowRight':
+                case 39:
                     this.car.goRight();
                     break;
-                case 'ArrowDown':
+                case 40:
                     this.car.goDown();
                     break;
             }
         });
     }
 
-    getTimer() {
+    getTimeOfGame() {
         const nowTime = new Date().getTime();
         const delta = (nowTime - this.beginTime) / (1000);
         return delta.toFixed(1);
@@ -113,7 +115,7 @@ class Game {
         }
     }
 
-    doWeEnd() {
+    doWeWin() {
         if (this.score >= SCORE_WIN) {
             if (+this.time < record) {
                 record = +this.time;
@@ -149,33 +151,32 @@ class Game {
 
 
     updateFrame() {
-        this.time = this.getTimer();
-        let doWeMet = false;
-        [this.starArray, doWeMet] = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
-        doWeMet = false;
-        [this.bombArray, doWeMet] = this.doActionIfStrikeTrue(this.bombArray, BOMB_SIZE, this.actionIfWeMetBomb);
-        this.road.update();
-        this.car.update();
-
-        this.starArray.forEach(star => {
-            const y = this.road.getY();
-            star.update();
-        });
-
-        this.bombArray.forEach(bomb => {
-            const y = this.road.getY();
-            bomb.update();
-        });
-
-        if (this.doWeEnd() || doWeMet) {
+        if (this.isWin || this.isLose) {
             // end of game
         } else {
+            this.addStars();
+            this.addBombs();
+
+            [this.starArray, ] = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
+            [this.bombArray, this.isLose] = this.doActionIfStrikeTrue(this.bombArray, BOMB_SIZE, this.actionIfWeMetBomb);
+            this.road.update();
+            this.car.update();
+
+            this.starArray.forEach(star => {
+                const y = this.road.getY();
+                star.update();
+            });
+
+            this.bombArray.forEach(bomb => {
+                const y = this.road.getY();
+                bomb.update();
+            });
+
+            this.time = this.getTimeOfGame();
             this.drawScore();
             this.drawTime();
             this.drawRecord();
-
-            this.addStars();
-            this.addBombs();
+            this.isWin = this.doWeWin();
         }
     }
 
