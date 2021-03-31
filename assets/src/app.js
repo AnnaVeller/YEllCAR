@@ -1,7 +1,14 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
-const CAR_SPEED = 1;
+const CAR_SPEED = 1; // скорость машины постоянная
+const ENGINE_SPEED = 5; // ускорение вправо/влево/вверх/вниз
+const FREQUENCY_STARS = 0.01; // частота появления звездочек
+const FREQUENCY_BOMBS = 0.003; // частота появления бомбочек
+const SCORE_WIN = 10; // счет победы
+
+const FPS = 120; // кадров в секунду
+
 const ROAD_SIZE = {w: 400, h: 600};
 const CAR_SIZE = {w: 60, h: 100};
 const STAR_SIZE = {w: 60, h: 60};
@@ -9,15 +16,11 @@ const BOMB_SIZE = {w: 60, h: 85};
 const BOOM_SIZE = {w: 80, h: 80};
 const BOOM2_SIZE = {w: 100, h: 100};
 const BOOM3_SIZE = {w: 120, h: 120};
-const ENGINE_SPEED = 5;
-const FPS = 120;
-const SCORE_WIN = 10;
+
 const START_TEXT = "СТАРТ";
 const END_TEXT = "ТЫ ВЫИГРАЛ";
 const LOSE_TEXT = "ТЫ ПРОИГРАЛ"
 const RECORD_BEGIN = 1000;
-const FREQUENCY_STARS = 0.01;
-const FREQUENCY_BOMBS = 0.003;
 
 
 let game;
