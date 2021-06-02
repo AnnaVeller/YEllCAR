@@ -3,6 +3,8 @@ class Game {
         this.score = 0;
         beginAudio.play();
         roadAudio.play();
+        this.xDown = null;
+        this.yDown = null;
         this.road = new Road("assets/img/road.jpg");
         this.car = new Car("assets/img/car.svg");
         this.starArray = [];
@@ -28,6 +30,40 @@ class Game {
                     break;
             }
         });
+
+        // для телефонов дальше до конца конструктора
+        const getTouches = event => event.touches || event.originalEvent.touches;
+        const handleTouchStart = event => {
+            const firstTouch = getTouches(event)[0];
+            this.xDown = firstTouch.clientX;
+            this.yDown = firstTouch.clientY;
+        };
+        const handleTouchMove = event => {
+            if (!this.xDown || !this.yDown) return;
+
+            const xUp = event.touches[0].clientX;
+            const yUp = event.touches[0].clientY;
+
+            const xDiff = this.xDown - xUp;
+            const yDiff = this.yDown - yUp;
+
+            console.log(this.xDown, this.yDown);
+            console.log(xDiff, yDiff);
+            if (Math.abs(xDiff) > Math.abs(yDiff)) { // отлавливаем разницу в движении
+                if (xDiff > 0) this.car.goLeft();
+                else this.car.goRight();
+
+            } else {
+                if (yDiff > 0) this.car.goUp();
+                else this.car.goDown();
+            }
+            // свайп был, обнуляем координаты
+            this.xDown = null;
+            this.yDown = null;
+        }
+
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
     }
 
     getTimeOfGame() {
@@ -157,7 +193,7 @@ class Game {
             this.addStars();
             this.addBombs();
 
-            [this.starArray, ] = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
+            [this.starArray,] = this.doActionIfStrikeTrue(this.starArray, STAR_SIZE, this.actionIfWeMetStar);
             [this.bombArray, this.isLose] = this.doActionIfStrikeTrue(this.bombArray, BOMB_SIZE, this.actionIfWeMetBomb);
             this.road.update();
             this.car.update();
