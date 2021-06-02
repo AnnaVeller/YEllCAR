@@ -19,12 +19,12 @@ const SCORE_WIN = 10; // счет победы
 const FPS = 240; // кадров в секунду
 
 const ROAD_SIZE = {w: CLIENT_WIDTH, h: CLIENT_HEIGHT};
-const CAR_SIZE = {w: 60, h: 100};
-const STAR_SIZE = {w: 60, h: 60};
-const BOMB_SIZE = {w: 60, h: 85};
-const BOOM_SIZE = {w: 80, h: 80};
-const BOOM2_SIZE = {w: 100, h: 100};
-const BOOM3_SIZE = {w: 120, h: 120};
+const CAR_SIZE = {w: CLIENT_WIDTH / 10, h: 100 / 60 * CLIENT_WIDTH / 10};
+const STAR_SIZE = {w: CLIENT_WIDTH / 10, h: CLIENT_WIDTH / 10};
+const BOMB_SIZE = {w: CLIENT_WIDTH / 10, h: 85 / 60 * CLIENT_WIDTH / 10};
+const BOOM_SIZE = {w: CLIENT_WIDTH / 7, h: CLIENT_WIDTH / 7};
+const BOOM2_SIZE = {w: CLIENT_WIDTH / 5, h: CLIENT_WIDTH / 5};
+const BOOM3_SIZE = {w: CLIENT_WIDTH / 4, h: CLIENT_WIDTH / 4};
 
 const START_TEXT = "СТАРТ";
 const END_TEXT = "ТЫ ВЫИГРАЛ";
