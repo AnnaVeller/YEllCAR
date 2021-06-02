@@ -12,9 +12,9 @@ console.log('Height: ', CLIENT_HEIGHT, '\nWidth: ', CLIENT_WIDTH);
 
 const CAR_SPEED = 0.7; // скорость машины постоянная
 const ENGINE_SPEED = 10; // ускорение вправо/влево/вверх/вниз
-const FREQUENCY_STARS = 0.01; // частота появления звездочек
-const FREQUENCY_BOMBS = 0.003; // частота появления бомбочек
-const SCORE_WIN = 10; // счет победы
+const FREQUENCY_STARS = 0.007; // частота появления звездочек
+const FREQUENCY_BOMBS = 0.005; // частота появления бомбочек
+const SCORE_WIN = 25; // счет победы
 
 const FPS = 240; // кадров в секунду
 
@@ -41,22 +41,14 @@ const boom2 = new Image();
 boom2.src = "assets/img/boom-2.svg";
 
 // Звуковые файлы
-const clashAudio = new Audio();
-clashAudio.src = "assets/audio/clash.wav";
+const clashAudio = "assets/audio/clash.wav";
+const beginAudio = "assets/audio/car_engine3.wav";
+const winAudio =  "assets/audio/win.wav";
+const loseAudio =  "assets/audio/lose.mp3";
+const roadAudio = "assets/audio/road.wav"; // пока без нее будем((
 
-const beginAudio = new Audio();
-beginAudio.src = "assets/audio/car_engine3.wav";
-
-const winAudio = new Audio();
-winAudio.src = "assets/audio/win.wav";
-
-const loseAudio = new Audio();
-loseAudio.src = "assets/audio/lose.mp3";
-
-const roadAudio = new Audio();
-roadAudio.loop = true;
-roadAudio.src = "assets/audio/road.wav";
-
+let soundTrack  = new Audio();
+soundTrack.src = beginAudio;
 
 class App {
     static init() {

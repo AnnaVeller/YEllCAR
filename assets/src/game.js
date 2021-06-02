@@ -1,8 +1,7 @@
 class Game {
     constructor() {
         this.score = 0;
-        beginAudio.play();
-        roadAudio.play();
+        soundTrack.play();
         this.xDown = null;
         this.yDown = null;
         this.road = new Road("assets/img/road.jpg");
@@ -117,7 +116,8 @@ class Game {
     }
 
     actionIfWeMetStar = () => {
-        clashAudio.play();
+        soundTrack.src = clashAudio;
+        soundTrack.play();
         this.score++;
     }
 
@@ -156,8 +156,9 @@ class Game {
             if (+this.time < record) {
                 record = +this.time;
             }
-            roadAudio.pause();
-            winAudio.play();
+
+            soundTrack.src = winAudio;
+            soundTrack.play();
             clearInterval(this.timerUpdateId);
             // сделать кнопку конца сразу после того, как удалим интеравал
             setTimeout(() => new Button([END_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT));
@@ -167,8 +168,8 @@ class Game {
     }
 
     youLose() {
-        roadAudio.pause();
-        loseAudio.play();
+        soundTrack.src = loseAudio;
+        soundTrack.play();
         clearInterval(this.timerUpdateId);
         const x = this.car.getX() + CAR_SIZE.w / 2;
         const y = this.car.getY() + CAR_SIZE.h / 2;
