@@ -50,12 +50,12 @@ class Game {
             console.log(this.xDown, this.yDown);
             console.log(xDiff, yDiff);
             if (Math.abs(xDiff) > Math.abs(yDiff)) { // отлавливаем разницу в движении
-                if (xDiff > 0) this.car.goLeft();
-                else this.car.goRight();
+                if (xDiff > 0) this.car.goLeft(xDiff);
+                else this.car.goRight(-xDiff);
 
             } else {
-                if (yDiff > 0) this.car.goUp();
-                else this.car.goDown();
+                if (yDiff > 0) this.car.goUp(yDiff);
+                else this.car.goDown(-yDiff);
             }
             // свайп был, обнуляем координаты
             this.xDown = null;

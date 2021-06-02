@@ -12,19 +12,25 @@ class Car {
         context.drawImage(this.image, this.x, this.y, CAR_SIZE.w, CAR_SIZE.h);
     }
 
-    goRight() {
+    goRight(speed = 0) {
+        console.log(speed);
+        if (speed && this.x + CAR_SIZE.w < ROAD_SIZE.w) this.x += speed;
         if (this.x + CAR_SIZE.w < ROAD_SIZE.w) this.x += ENGINE_SPEED;
     }
 
-    goLeft() {
+    goLeft(speed = 0) {
+        if (speed && this.x + CAR_SIZE.w < ROAD_SIZE.w) this.x -= speed;
         if (this.x > 0) this.x -= ENGINE_SPEED;
     }
 
-    goUp() {
+    goUp(speed = 0) {
+        console.log(speed);
+        if (speed && this.x + CAR_SIZE.w < ROAD_SIZE.w) this.y -= speed;
         if (this.y > 0) this.y -= ENGINE_SPEED;
     }
 
-    goDown() {
+    goDown(speed = 0) {
+        if (speed && this.x + CAR_SIZE.w < ROAD_SIZE.w) this.y += speed;
         if (this.y + CAR_SIZE.h < ROAD_SIZE.h) this.y += ENGINE_SPEED;
     }
 
