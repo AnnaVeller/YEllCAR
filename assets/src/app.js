@@ -1,15 +1,24 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
+const h = document.documentElement.clientHeight;
+const w = document.documentElement.clientWidth;
+const CLIENT_HEIGHT = h - 40;
+const CLIENT_WIDTH = w > h ? 0.9 * h - 40 : w - 40;
 
-const CAR_SPEED = 1; // скорость машины постоянная
-const ENGINE_SPEED = 5; // ускорение вправо/влево/вверх/вниз
+canvas.width = CLIENT_WIDTH;
+canvas.height = CLIENT_HEIGHT;
+
+console.log('Height: ', CLIENT_HEIGHT, '\nWidth: ', CLIENT_WIDTH);
+
+const CAR_SPEED = 0.7; // скорость машины постоянная
+const ENGINE_SPEED = 10; // ускорение вправо/влево/вверх/вниз
 const FREQUENCY_STARS = 0.01; // частота появления звездочек
 const FREQUENCY_BOMBS = 0.003; // частота появления бомбочек
 const SCORE_WIN = 10; // счет победы
 
-const FPS = 120; // кадров в секунду
+const FPS = 240; // кадров в секунду
 
-const ROAD_SIZE = {w: 400, h: 600};
+const ROAD_SIZE = {w: CLIENT_WIDTH, h: CLIENT_HEIGHT};
 const CAR_SIZE = {w: 60, h: 100};
 const STAR_SIZE = {w: 60, h: 60};
 const BOMB_SIZE = {w: 60, h: 85};
@@ -21,7 +30,6 @@ const START_TEXT = "СТАРТ";
 const END_TEXT = "ТЫ ВЫИГРАЛ";
 const LOSE_TEXT = "ТЫ ПРОИГРАЛ"
 const RECORD_BEGIN = 1000;
-
 
 let game;
 let record = RECORD_BEGIN;
