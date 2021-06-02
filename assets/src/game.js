@@ -1,6 +1,7 @@
 class Game {
     constructor() {
         this.score = 0;
+        soundTrack.src = beginAudio;
         soundTrack.play();
         this.xDown = null;
         this.yDown = null;
@@ -178,8 +179,9 @@ class Game {
         setTimeout(this.drawBoom.bind(this, BOOM3_SIZE, x, y), 300);
         // сделать кнопку конца сразу после того, как удалим интеравал
         setTimeout(() =>
-                new Button([LOSE_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT)
-            , 400);
+                new Button([LOSE_TEXT, `Счет: ${this.score}`, `Время: ${this.time}`], END_TEXT),
+            400
+        );
     }
 
     drawBoom(size, x, y) {
