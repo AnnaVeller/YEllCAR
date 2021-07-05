@@ -49,7 +49,6 @@ const loseAudio = unCoding + LOSE_AUDIO_BASE64;
 const roadAudio = unCoding + ROAD_AUDIO_BASE64; // пока без нее будем((
 
 let soundTrack = new Audio();
-soundTrack.src = beginAudio;
 
 class App {
     static init() {
@@ -58,7 +57,6 @@ class App {
 
         road.onload = function () {
             context.drawImage(road, 0, 0, ROAD_SIZE.w, ROAD_SIZE.h);
-            //context.drawImage(bomb, 0, 0, BOMB_SIZE.w, BOMB_SIZE.h);
             const startBtn = new Button([START_TEXT], START_TEXT);
         };
     }
