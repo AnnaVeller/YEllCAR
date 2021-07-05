@@ -3,7 +3,8 @@ class Star {
         this.x = x;
         this.y = -STAR_SIZE.h;
         this.image = new Image();
-        this.image.src = "assets/img/star.svg";
+        const unCoding = "data:image/png;base64,";
+        this.image.src = unCoding + STAR_IMG_BASE64;
     }
 
     update() {
@@ -27,9 +28,10 @@ class Bomb {
         this.image1 = new Image();
         this.image2 = new Image();
         this.image3 = new Image();
-        this.image1.src = "assets/img/bomb.svg";
-        this.image2.src = "assets/img/bomb-2.svg";
-        this.image3.src = "assets/img/bomb-3.svg";
+        const unCoding = "data:image/png;base64,";
+        this.image1.src = unCoding + BOMB_IMG_BASE64;
+        this.image2.src = unCoding + BOMB_2_IMG_BASE64;
+        this.image3.src = unCoding + BOMB_3_IMG_BASE64;
         this.count = 1;
     }
 
