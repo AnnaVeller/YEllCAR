@@ -41,11 +41,12 @@ const boom2 = new Image();
 boom2.src = "assets/img/boom-2.svg";
 
 // Звуковые файлы
-const clashAudio = "data:audio/wav;base64," + clashAudioBase64;
-const beginAudio = "data:audio/wav;base64," + beginAudioBase64;
-const winAudio = "data:audio/wav;base64," + winAudioBase64;
-const loseAudio = "data:audio/wav;base64," + loseAudioBase64;
-const roadAudio = "data:audio/wav;base64," + roadAudioBase64;; // пока без нее будем((
+const unCoding = "data:audio/wav;base64,";
+const clashAudio = unCoding + CLASH_AUDIO_BASE64;
+const beginAudio = unCoding + BEGIN_AUDIO_BASE64;
+const winAudio = unCoding + WIN_AUDIO_BASE64;
+const loseAudio = unCoding + LOSE_AUDIO_BASE64;
+const roadAudio = unCoding + ROAD_AUDIO_BASE64; // пока без нее будем((
 
 let soundTrack = new Audio();
 soundTrack.src = beginAudio;
