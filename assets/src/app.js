@@ -41,13 +41,13 @@ const boom2 = new Image();
 boom2.src = "assets/img/boom-2.svg";
 
 // Звуковые файлы
-const clashAudio = "assets/audio/clash.wav";
-const beginAudio = "assets/audio/car_engine3.wav";
-const winAudio =  "assets/audio/win.wav";
-const loseAudio =  "assets/audio/lose.mp3";
-const roadAudio = "assets/audio/road.wav"; // пока без нее будем((
+const clashAudio = "data:audio/wav;base64," + clashAudioBase64;
+const beginAudio = "data:audio/wav;base64," + beginAudioBase64;
+const winAudio = "data:audio/wav;base64," + winAudioBase64;
+const loseAudio = "data:audio/wav;base64," + loseAudioBase64;
+const roadAudio = "data:audio/wav;base64," + roadAudioBase64;; // пока без нее будем((
 
-let soundTrack  = new Audio();
+let soundTrack = new Audio();
 soundTrack.src = beginAudio;
 
 class App {
@@ -65,5 +65,3 @@ class App {
 
 
 App.init();
-
-
