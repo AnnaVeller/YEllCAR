@@ -10,10 +10,10 @@ canvas.height = CLIENT_HEIGHT;
 
 console.log('Height: ', CLIENT_HEIGHT, '\nWidth: ', CLIENT_WIDTH);
 
-const CAR_SPEED = 0.7; // скорость машины постоянная
-const ENGINE_SPEED = 10; // ускорение вправо/влево/вверх/вниз
+const CAR_SPEED = 1; // скорость машины постоянная
+const ENGINE_SPEED = 12; // ускорение вправо/влево/вверх/вниз
 const FREQUENCY_STARS = 0.007; // частота появления звездочек
-const FREQUENCY_BOMBS = 0.005; // частота появления бомбочек
+const FREQUENCY_BOMBS = 0.0046; // частота появления бомбочек
 const SCORE_WIN = 25; // счет победы
 
 const FPS = 240; // кадров в секунду
@@ -26,7 +26,7 @@ const BOOM_SIZE = {w: CLIENT_WIDTH / 7, h: CLIENT_WIDTH / 7};
 const BOOM2_SIZE = {w: CLIENT_WIDTH / 5, h: CLIENT_WIDTH / 5};
 const BOOM3_SIZE = {w: CLIENT_WIDTH / 4, h: CLIENT_WIDTH / 4};
 
-const START_TEXT = "СТАРТ";
+const START_TEXT = ["СТАРТ", "Набери 25 очков", "Остерегайся бомб!"];
 const END_TEXT = "ТЫ ВЫИГРАЛ";
 const LOSE_TEXT = "ТЫ ПРОИГРАЛ"
 const RECORD_BEGIN = 1000;
@@ -57,7 +57,7 @@ class App {
 
         road.onload = function () {
             context.drawImage(road, 0, 0, ROAD_SIZE.w, ROAD_SIZE.h);
-            const startBtn = new Button([START_TEXT], START_TEXT);
+            const startBtn = new Button(START_TEXT, START_TEXT);
         };
     }
 }
